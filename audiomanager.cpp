@@ -1,6 +1,7 @@
 #include "audiomanager.h"
 #include <QDir>
 #include <QFile>
+#include <QFileInfo>
 #include <QRegularExpression>  // Qt6推荐使用的正则类
 #include <QMediaMetaData>
 #include <QImage>
@@ -69,6 +70,10 @@ void AudioManager::loadAndPlay(const QString &filePath)
     
     // 发送播放状态变化信号
     emit playbackStateChanged(true);
+    
+    // 提取并发送歌曲标题
+    QString fileName = QFileInfo(filePath).fileName();
+    emit songTitleChanged(fileName);
 
     // 加载歌词
     loadLyric(filePath);
@@ -230,6 +235,17 @@ void AudioManager::onPositionChanged(qint64 position)
 QStringList AudioManager::getLyricTexts() const
 {
     return m_lyricTexts;
+}
+
+// 获取当前歌词索引（根据播放位置）
+int AudioManager::getCurrentLyricIndex(qint64 position) const {
+    if (m_lyricMap.isEmpty()) return -1;
+    auto it = m_lyricMap.upperBound(position);
+    if (it != m_lyricMap.begin()) {
+        --it;
+        return m_lyricTexts.indexOf(it.value());
+    }
+    return -1;
 }
 
 // 设置当前播放列表

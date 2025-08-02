@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
 #include <filesystem>
+#include <QFileInfo>
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -12,8 +13,11 @@ MainWindow::MainWindow(QWidget *parent)
     // 连接播放状态变化信号
     connect(audioMgr, &AudioManager::playbackStateChanged,
             this, &MainWindow::onPlaybackStateChanged);
-    connect(audioMgr,&AudioManager::positionChanged,this,&MainWindow::onPositionChanged);
-    connect(ui->slider_progress,&QSlider::sliderMoved,this,&MainWindow::on_slider_progress_sliderMoved);
+    connect(audioMgr,&AudioManager::positionChanged,this,
+        &MainWindow::onPositionChanged);
+    connect(audioMgr, &AudioManager::lyricLoaded, this, &MainWindow::updateLyrics);
+    connect(audioMgr, &AudioManager::songTitleChanged, this, &MainWindow::onSongTitleChanged);
+
 }
 
 
@@ -116,6 +120,9 @@ void MainWindow::onPositionChanged(qint64 position, qint64 duration)
     // 更新时间标签
     ui->label_currentTime->setText(formatTime(position));
     ui->label_totalTime->setText(formatTime(duration));
+
+    // 高亮当前歌词
+    highlightCurrentLyric(position);
 }
 
 // 处理进度条拖动
@@ -142,5 +149,31 @@ QString MainWindow::formatTime(qint64 timeInMs)
         .arg(seconds, 2, 10, QChar('0'));
 }
 
+void MainWindow::updateLyrics(const QStringList &lyrics) {
+    ui->lyriclist->clear();
+    for (const QString &lyric : lyrics) {
+        ui->lyriclist->addItem(lyric);
+    }
+    currentLyricIndex = -1;
+}
 
 
+void MainWindow::highlightCurrentLyric(qint64 position) {
+    // 需要从 AudioManager 获取当前歌词索引（稍后添加）
+    int newIndex = audioMgr->getCurrentLyricIndex(position);
+    if (newIndex != currentLyricIndex && newIndex >= 0 && newIndex < ui->lyriclist->count()) {
+        // 取消上一行高亮
+        if (currentLyricIndex >= 0) {
+            ui->lyriclist->item(currentLyricIndex)->setForeground(Qt::black);
+        }
+        // 高亮当前行
+        ui->lyriclist->item(newIndex)->setForeground(Qt::red);
+        // 滚动到当前行
+        ui->lyriclist->scrollToItem(ui->lyriclist->item(newIndex), QAbstractItemView::PositionAtCenter);
+        currentLyricIndex = newIndex;
+    }
+}
+
+void MainWindow::onSongTitleChanged(const QString &title) {
+    ui->label_title->setText(title);
+}

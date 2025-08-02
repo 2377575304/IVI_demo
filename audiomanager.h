@@ -7,6 +7,7 @@
 #include <QImage>
 #include <QMap>
 #include <QStringList>
+#include <ui_mainwindow.h>
 
 // 定义歌词映射类型（时间戳 -> 歌词文本）
 using LyricMap = QMap<qint64, QString>;
@@ -44,6 +45,9 @@ signals:
     
     // 播放状态变化
     void playbackStateChanged(bool isPlaying);
+    
+    // 歌曲标题变化
+    void songTitleChanged(const QString &title);
 
 public slots:
     // 播放/暂停切换
@@ -84,6 +88,9 @@ public:
     
     // 获取媒体总时长
     qint64 duration() const;
+    
+    // 获取当前歌词索引
+    int getCurrentLyricIndex(qint64 position) const;
 
 private:
     QMediaPlayer *m_player = nullptr;  // 媒体播放器

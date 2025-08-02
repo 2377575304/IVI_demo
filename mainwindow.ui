@@ -353,7 +353,7 @@ QPushButton:pressed {
            </layout>
           </item>
           <item>
-           <layout class="QVBoxLayout" name="verticalLayout_4" stretch="5,1">
+           <layout class="QVBoxLayout" name="verticalLayout_4" stretch="5,0,1">
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="1,5">
               <property name="leftMargin">
@@ -430,13 +430,20 @@ font: 700 29pt &quot;MS Sans Serif&quot;;</string>
                </layout>
               </item>
               <item>
-               <widget class="QListWidget" name="lrclist">
+               <widget class="QListWidget" name="lyriclist">
                 <property name="styleSheet">
                  <string notr="true">border: 1px solid transparent; </string>
                 </property>
                </widget>
               </item>
              </layout>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_title">
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
             </item>
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_5">

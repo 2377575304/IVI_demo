@@ -48,13 +48,18 @@ private slots:
     // 处理进度条拖动 有bug为解决
     //void on_slider_progress_sliderMoved(int position);
 
+private slots:
+    void updateLyrics(const QStringList &lyrics);
+    void highlightCurrentLyric(qint64 position);
+    void onSongTitleChanged(const QString &title);
+
 private:
     // 格式化时间（毫秒转为mm:ss格式）
     QString formatTime(qint64 timeInMs);
     
     Ui::MainWindow *ui;
     AudioManager *audioMgr;
-    
+    int currentLyricIndex = -1;
     
 };
 #endif // MAINWINDOW_H
