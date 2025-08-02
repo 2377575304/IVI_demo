@@ -2,4 +2,6 @@
     <qresource prefix="/image">
         <file>Windows.png</file>
     </qresource>
+    <qresource prefix="/M/music"/>
+    <qresource prefix="/M/lrc"/>
 </RCC>
