@@ -2,6 +2,7 @@
 #include "./ui_mainwindow.h"
 #include <filesystem>
 #include <QFileInfo>
+#include <qdir.h>
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -9,6 +10,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
     audioMgr = new AudioManager(this);
     // 连接播放状态变化信号
     connect(audioMgr, &AudioManager::playbackStateChanged,
@@ -17,6 +19,9 @@ MainWindow::MainWindow(QWidget *parent)
         &MainWindow::onPositionChanged);
     connect(audioMgr, &AudioManager::lyricLoaded, this, &MainWindow::updateLyrics);
     connect(audioMgr, &AudioManager::songTitleChanged, this, &MainWindow::onSongTitleChanged);
+//链接地图信号
+
+
 
 }
 
@@ -177,3 +182,5 @@ void MainWindow::highlightCurrentLyric(qint64 position) {
 void MainWindow::onSongTitleChanged(const QString &title) {
     ui->label_title->setText(title);
 }
+
+

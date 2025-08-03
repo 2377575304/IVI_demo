@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <qlistwidget.h>
 #include "audiomanager.h"
+#include <qquickwidget>
 
 
 QT_BEGIN_NAMESPACE
@@ -30,28 +31,25 @@ private slots:
     void on_pushButton_map_clicked();
 
     void on_pushButton_ctl_clicked();
-
-    void on_musiclist_itemClicked(QListWidgetItem *item);
-    
-    void on_last_clicked();
-    
+    void on_musiclist_itemClicked(QListWidgetItem *item); 
+    void on_last_clicked();    
     void on_pushButton_stop_clicked();
-    
-    void on_next_clicked();
-    
+    void on_next_clicked();    
     // 处理播放状态变化
-    void onPlaybackStateChanged(bool isPlaying);
-    
+    void onPlaybackStateChanged(bool isPlaying);  
     // 处理播放进度变化
-    void onPositionChanged(qint64 position, qint64 duration);
-    
+    void onPositionChanged(qint64 position, qint64 duration);   
     // 处理进度条拖动 有bug为解决
     //void on_slider_progress_sliderMoved(int position);
+   
+
 
 private slots:
     void updateLyrics(const QStringList &lyrics);
     void highlightCurrentLyric(qint64 position);
     void onSongTitleChanged(const QString &title);
+     //map方法
+
 
 private:
     // 格式化时间（毫秒转为mm:ss格式）
@@ -60,6 +58,7 @@ private:
     Ui::MainWindow *ui;
     AudioManager *audioMgr;
     int currentLyricIndex = -1;
+
     
 };
 #endif // MAINWINDOW_H
