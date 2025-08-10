@@ -14,6 +14,7 @@ find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS
     Widgets
     Multimedia
+    MultimediaWidgets
     Location
     Positioning
     Quick
@@ -31,10 +32,13 @@ set(PROJECT_SOURCES
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
+    find_package(Qt6 REQUIRED COMPONENTS Core)
+
     qt_add_executable(IVI_demo
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
         resource.qrc
+        videomanager.h videomanager.cpp
     )
 else()
     if(ANDROID)
@@ -57,7 +61,9 @@ target_link_libraries(IVI_demo
     Qt${QT_VERSION_MAJOR}::Quick
     Qt${QT_VERSION_MAJOR}::Qml
     Qt${QT_VERSION_MAJOR}::QuickWidgets
+    Qt${QT_VERSION_MAJOR}::MultimediaWidgets
 )
+target_link_libraries(IVI_demo PRIVATE Qt6::Core)
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 if(${QT_VERSION} VERSION_LESS 6.1.0)

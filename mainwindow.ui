@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>840</width>
-    <height>478</height>
+    <width>914</width>
+    <height>485</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -37,13 +37,13 @@
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout_6"/>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>70</x>
       <y>40</y>
-      <width>731</width>
-      <height>371</height>
+      <width>804</width>
+      <height>526</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_7">
@@ -311,7 +311,7 @@ QPushButton:pressed {
           <string notr="true">background-color: rgb(255, 255, 255);</string>
          </property>
          <property name="currentIndex">
-          <number>4</number>
+          <number>1</number>
          </property>
          <widget class="QWidget" name="page_main">
           <widget class="QLabel" name="label">
@@ -800,8 +800,8 @@ font: 700 29pt &quot;MS Sans Serif&quot;;</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>840</width>
-     <height>17</height>
+     <width>914</width>
+     <height>24</height>
     </rect>
    </property>
   </widget>

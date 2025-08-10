@@ -5,6 +5,9 @@
 #include <qlistwidget.h>
 #include "audiomanager.h"
 #include <qquickwidget>
+#include <QGraphicsScene>
+#include <QGraphicsPixmapItem>
+
 
 
 QT_BEGIN_NAMESPACE
@@ -58,6 +61,10 @@ private:
     Ui::MainWindow *ui;
     AudioManager *audioMgr;
     int currentLyricIndex = -1;
+
+    QGraphicsScene *musicScene;
+    QGraphicsPixmapItem *albumcoverItem;
+
 
     
 };

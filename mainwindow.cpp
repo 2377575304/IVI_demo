@@ -19,6 +19,10 @@ MainWindow::MainWindow(QWidget *parent)
         &MainWindow::onPositionChanged);
     connect(audioMgr, &AudioManager::lyricLoaded, this, &MainWindow::updateLyrics);
     connect(audioMgr, &AudioManager::songTitleChanged, this, &MainWindow::onSongTitleChanged);
+
+
+
+
 //链接地图信号
 
 
@@ -30,6 +34,9 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+
+
+
 
 void MainWindow::on_pushButton_main_clicked()
 {
